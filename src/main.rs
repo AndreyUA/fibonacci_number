@@ -44,17 +44,15 @@ fn fibo(num: u32) -> u128 {
     let mut result: u128 = 0;
 
     for index in 0..num {
-        if index == 0 {
-            result = 0;
-        } else if index == 1 {
-            result = 1;
-        } else if index == 2 {
-            result = 1;
-        } else {
-            let prev_prev_result = prev_result;
-            prev_result = result;
-            result = prev_prev_result + prev_result;
-        };
+        match index {
+            0 => result = 0,
+            1 | 2 => result = 1,
+            _ => {
+                let prev_prev_result = prev_result;
+                prev_result = result;
+                result = prev_prev_result + prev_result;
+            }
+        }
     }
 
     result
