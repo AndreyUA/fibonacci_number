@@ -1,8 +1,41 @@
-fn main() {
-    let count = 160;
-    let answer = fibo(count);
+use std::io;
 
-    println!("The {} number ---> {}", count, answer);
+fn main() {
+    println!("Welcome to Fibonacci numbers calculator");
+
+    loop {
+        println!("Choose the number between 0 and 180: ");
+
+        let mut number = String::new();
+
+        io::stdin()
+            .read_line(&mut number)
+            .expect("Failed to read line");
+
+        let number: u32 = match number.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Please enter a number!");
+                continue;
+            }
+        };
+
+        if number < 1 {
+            println!("Please enter a number more then 0!");
+            continue;
+        }
+
+        if number > 180 {
+            println!("Please enter a number less then 180!");
+            continue;
+        }
+
+        let answer = fibo(number);
+
+        println!("The {} number ---> {}", number, answer);
+
+        break;
+    }
 }
 
 fn fibo(num: u32) -> u128 {
@@ -14,6 +47,8 @@ fn fibo(num: u32) -> u128 {
         if index == 0 {
             result = 0;
         } else if index == 1 {
+            result = 1;
+        } else if index == 2 {
             result = 1;
         } else {
             let prev_prev_result = prev_result;
